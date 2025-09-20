@@ -98,7 +98,8 @@ function App() {
         requestData.negative_prompt = selectedParameters.negative_prompt;
       }
 
-      const response = await axios.post('/api/v1/generate-parallel', requestData);
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+      const response = await axios.post(`${backendUrl}/api/v1/generate-parallel`, requestData);
       handleImageGenerated(response.data);
 
       // Clear the prompt input after successful generation

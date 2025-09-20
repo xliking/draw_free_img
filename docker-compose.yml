@@ -5,6 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: draw-backend:latest
     ports:
       - "8000:8000"
     environment:
@@ -19,10 +20,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_BACKEND_URL: http://localhost:8000
+    image: draw-frontend:latest
     ports:
       - "3000:80"
-    environment:
-      - REACT_APP_BACKEND_URL=http://localhost:8000
     depends_on:
       - backend
     restart: unless-stopped

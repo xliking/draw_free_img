@@ -1,13 +1,17 @@
 # Build stage
-FROM node:18-alpine as build
+FROM node:18 AS build
 
 WORKDIR /app
+
+# Build argument for backend URL
+ARG VITE_BACKEND_URL=http://localhost:8000
+ENV VITE_BACKEND_URL=${VITE_BACKEND_URL}
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies (including devDependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
