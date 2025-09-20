@@ -4,7 +4,16 @@
       "Bash(chmod:*)",
       "Bash(python test:*)",
       "Bash(docker tag:*)",
-      "Bash(docker push:*)"
+      "Bash(docker push:*)",
+      "Bash(docker build:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker logs:*)",
+      "Bash(docker commit:*)",
+      "Read(//d/pythonProjects/**)",
+      "Bash(docker cp:*)",
+      "Bash(docker-compose stop:*)"
     ],
     "deny": [],
     "ask": []

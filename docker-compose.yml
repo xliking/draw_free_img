@@ -11,9 +11,6 @@ services:
     environment:
       - PYTHONPATH=/app
       - PYTHONUNBUFFERED=1
-    volumes:
-      - ./keys.txt:/app/keys.txt:ro
-      - ./backend/app:/app/app
     restart: unless-stopped
 
   draw-frontend:
@@ -21,7 +18,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VITE_BACKEND_URL: http://localhost:8000
+#        VITE_BACKEND_URL: http://localhost:8000
+        VITE_BACKEND_URL: http://74.48.52.139:8000
     image: xlike0616/draw-frontend:latest
     ports:
       - "3000:80"
