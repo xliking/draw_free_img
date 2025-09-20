@@ -122,6 +122,7 @@ public
 tmp/
 temp/
 
+.claude
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -151,3 +152,5 @@ generated_images/
 
 # API Keys (IMPORTANT: Never commit API keys)
 keys.txt
+/.claude/
+/CLAUDE.md
