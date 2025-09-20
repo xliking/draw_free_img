@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: draw-backend:latest
+    image: xlike0616/draw-backend:latest
     ports:
       - "8000:8000"
     environment:
@@ -22,9 +22,9 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_BACKEND_URL: http://localhost:8000
-    image: draw-frontend:latest
+    image: xlike0616/draw-frontend:latest
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      - draw-backend
     restart: unless-stopped

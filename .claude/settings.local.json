@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(chmod:*)",
-      "Bash(python test:*)"
+      "Bash(python test:*)",
+      "Bash(docker tag:*)",
+      "Bash(docker push:*)"
     ],
     "deny": [],
     "ask": []
