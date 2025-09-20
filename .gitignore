@@ -150,4 +150,4 @@ ssl/
 generated_images/
 
 # API Keys (IMPORTANT: Never commit API keys)
-keys.txt
+#keys.txt
