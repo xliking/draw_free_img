@@ -1,307 +1,101 @@
-# AI Drawing Studio
+# 🎨 AI Drawing Studio
 
-An open-source AI-powered drawing website that integrates with SiliconFlow's image generation API to create stunning artwork from text prompts.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-18.2+-61DAFB.svg)](https://reactjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-009688.svg)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
 
-## Features
+一个开源的人工智能绘画网站，集成 SiliconFlow 的图像生成 API，通过文本提示创建令人惊艳的艺术作品。
 
-### 🎨 Core Features
-- **AI Image Generation**: Generate high-quality images using advanced AI models
-- **Multiple Models**: Support for Kolors and Qwen-Image models
-- **Batch Generation**: Generate up to 4 images at once
-- **Reference Images**: Upload reference images to guide generation
-- **Advanced Parameters**: Fine-tune generation with seeds, steps, guidance scale, and CFG
+## ✨ 核心特性
 
-### 🚀 Technical Features
-- **Load Balancing**: Intelligent API key rotation across 400+ keys
-- **Rate Limiting**: Automatic handling of API rate limits (IPM=2, IPD=400)
-- **Auto Retry**: Exponential backoff retry mechanism
-- **Real-time Stats**: Monitor API usage and key status
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Internationalization**: Support for English and Chinese
+- 🤖 **AI 图像生成**: 使用先进的 AI 模型生成高质量图像
+- 🎨 **多模型支持**: 支持 Kolors 和 Qwen-Image 模型  
+- ⚡ **批量生成**: 一次生成多达 10 张图像
+- 🖼️ **参考图像**: 上传参考图像指导生成过程
+- 🎛️ **高级参数**: 精细调节种子、步数、引导比例和 CFG
+- ⚖️ **智能负载均衡**: 400+ API 密钥智能轮换，自动重试
+- 📊 **实时监控**: API 使用情况和密钥状态监控
+- 📱 **响应式设计**: 支持桌面、平板和移动设备
 
-### 📱 User Experience
-- **Modern UI**: Clean, intuitive interface built with Tailwind CSS
-- **Image Gallery**: Browse and manage generated images
-- **Download Support**: Easy image downloading with expiry warnings
-- **Parameter Copying**: Copy seeds to reproduce favorite generations
-- **Progress Tracking**: Real-time generation progress indicators
+## 🛠️ 技术栈
 
-## Tech Stack
+### 前端
+- **React 18** - 现代 React 与 Hooks
+- **Vite** - 快速构建工具和开发服务器
+- **Tailwind CSS** - 实用优先的 CSS 框架
+- **Axios** - API 请求的 HTTP 客户端
+- **Lucide React** - 精美图标库
 
-### Frontend
-- **React 18** - Modern React with hooks
-- **Vite** - Fast build tool and development server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Axios** - HTTP client for API requests
-- **Lucide React** - Beautiful icon library
+### 后端
+- **FastAPI** - 高性能 Python Web 框架
+- **httpx** - 异步 HTTP 客户端
+- **Pydantic** - 数据验证和设置管理
+- **uvicorn** - 生产环境 ASGI 服务器
 
-### Backend
-- **FastAPI** - High-performance Python web framework
-- **httpx** - Async HTTP client for API requests
-- **Pydantic** - Data validation and settings management
-- **uvicorn** - ASGI server for production
 
-### Infrastructure
-- **Docker** - Containerization for easy deployment
-- **Nginx** - Reverse proxy and load balancer
-- **Redis** - Optional caching and session storage
+## 🚀 快速开始
 
-## Quick Start
-
-### Prerequisites
+### 环境要求
 - Python 3.11+
 - Node.js 18+
-- Docker and Docker Compose (for containerized deployment)
+- Docker 和 Docker Compose（容器化部署）
 
-### Local Development
+### Docker 部署（推荐）
 
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd ai-drawing-studio
+```text
+  复制 .env.example 到 .env
+  修改里面的地址为 你的服务器地址 (REACT_APP_BACKEND_URL=http://localhost:8000)
+  也就是 http://你的服务器地址:后端端口
+  
+  执行对应的 docker-compose.yml , docker compose up -d 
 ```
 
-2. **Set up API keys**
-```bash
-# Copy your SiliconFlow API keys to keys.txt (one per line)
-# Note: The application will work without keys (using dummy keys for development)
-echo "sk-your-api-key-1" > keys.txt
-echo "sk-your-api-key-2" >> keys.txt
-```
 
-3. **Quick Start (All-in-One)**
-```bash
-# Windows: Double-click start-all.bat or run:
-start-all.bat
+## 📋 API 文档
 
-# Linux/Mac:
-./start-all.sh
-```
+### 主要接口
 
-4. **Manual Setup**
+| 接口 | 方法 | 描述 |
+|------|------|------|
+| `/api/v1/generate-parallel` | POST | 并行生成多张图片 |
 
-**Backend:**
-```bash
-cd backend
-pip install -r requirements.txt
 
-# Choose one of these options:
-python run.py          # Option 1
-start.bat              # Option 2 (Windows)
-./start.sh             # Option 3 (Linux/Mac)
-```
+### 请求示例
 
-**Frontend:**
-```bash
-cd frontend
-npm install
-
-# Choose one of these options:
-npm run dev            # Option 1
-start.bat              # Option 2 (Windows)
-./start.sh             # Option 3 (Linux/Mac)
-```
-
-5. **Access the application**
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/api/docs
-
-### Docker Deployment
-
-1. **Copy and configure environment**
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
-
-2. **Start all services**
-```bash
-docker-compose up -d
-```
-
-3. **Access the application**
-- Application: http://localhost
-- API: http://localhost/api
-- API Documentation: http://localhost/api/docs
-
-## API Documentation
-
-### Generate Image
-```http
-POST /api/v1/generate
-```
-
-**Request Body:**
 ```json
 {
-  "prompt": "A beautiful landscape with mountains and lake",
-  "negative_prompt": "blurry, low quality",
+  "prompt": "一幅美丽的山水画，湖光山色",
+  "negative_prompt": "模糊，低质量",
   "model": "Kwai-Kolors/Kolors",
   "image_size": "1024x1024",
-  "batch_size": 1,
-  "seed": 123456789,
-  "num_inference_steps": 20,
-  "guidance_scale": 7.5,
-  "cfg": 4.0,
-  "image": "base64_encoded_reference_image"
+  "batch_size": 2,
+  "seed": 12345,
+  "num_inference_steps": 25,
+  "guidance_scale": 7.5
 }
 ```
 
-**Response:**
-```json
-{
-  "images": [
-    {
-      "url": "https://api.siliconflow.cn/...",
-      "width": 1024,
-      "height": 1024
-    }
-  ],
-  "seed": 123456789,
-  "inference_time": 2.34,
-  "model": "Kwai-Kolors/Kolors",
-  "parameters": {...}
-}
-```
-
-### Available Models
-```http
-GET /api/v1/models
-```
-
-### API Statistics
-```http
-GET /api/v1/stats
-```
-
-### Health Check
-```http
-GET /api/v1/health
-```
-
-## Configuration
-
-### Environment Variables
-```bash
-# API Configuration
-API_KEYS_FILE=keys.txt
-MAX_RETRIES=3
-BASE_DELAY=1.0
-
-# Redis Configuration
-REDIS_URL=redis://localhost:6379
-
-# CORS Configuration
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
-
-# Logging
-LOG_LEVEL=INFO
-```
-
-### API Key Management
-- Add one SiliconFlow API key per line in `keys.txt`
-- The system automatically handles load balancing and rate limiting
-- Monitor key usage through the `/api/v1/stats` endpoint
-
-## Development
-
-### Frontend Development
-```bash
-cd frontend
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-```
-
-### Backend Development
-```bash
-cd backend
-python run.py                   # Start with auto-reload
-python -m pytest               # Run tests (when implemented)
-```
-
-### Code Structure
+## 📁 项目结构
 
 ```
 ai-drawing-studio/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ImageGenerator.jsx    # Image generation form
-│   │   │   └── ImageGallery.jsx      # Image display gallery
-│   │   ├── App.jsx                   # Main application
-│   │   └── main.jsx                  # Entry point
-│   ├── package.json
-│   └── vite.config.js
-├── backend/
+├── backend/                 # 后端服务
 │   ├── app/
-│   │   ├── api/
-│   │   │   └── image.py              # Image generation endpoints
-│   │   ├── utils/
-│   │   │   └── load_balancer.py      # API key load balancing
-│   │   └── main.py                   # FastAPI application
+│   │   ├── api/            # API 路由
+│   │   ├── utils/          # 工具类
+│   │   └── main.py         # 应用入口
+│   ├── Dockerfile
 │   └── requirements.txt
-├── docker-compose.yml
-└── README.md
+├── frontend/               # 前端应用
+│   ├── src/
+│   │   ├── components/     # React 组件
+│   │   ├── App.jsx        # 主应用组件
+│   │   └── main.jsx       # 应用入口
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml      # Docker 编排文件
+├── keys.txt               # API 密钥文件
+└── README.md              # 项目文档
 ```
-
-## Production Deployment
-
-### Using Docker
-```bash
-# Build and start all services
-docker-compose up -d
-
-# Scale backend for high load
-docker-compose up -d --scale backend=3
-
-# View logs
-docker-compose logs -f
-```
-
-### Manual Deployment
-1. Set up a reverse proxy (Nginx recommended)
-2. Configure SSL certificates
-3. Set up Redis for caching (optional)
-4. Configure environment variables
-5. Run backend with production ASGI server
-6. Serve frontend static files
-
-### Performance Optimization
-- Use Redis for caching API responses
-- Configure CDN for static assets
-- Enable Nginx compression
-- Set appropriate cache headers
-- Monitor API key usage and quotas
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [SiliconFlow](https://siliconflow.cn/) for providing the AI image generation API
-- [Tailwind CSS](https://tailwindcss.com/) for the amazing CSS framework
-- [FastAPI](https://fastapi.tiangolo.com/) for the fantastic web framework
-- [React](https://react.dev/) for the powerful frontend library
-
-## Support
-
-If you encounter any issues or have questions:
-
-1. Check the [GitHub Issues](https://github.com/your-username/ai-drawing-studio/issues)
-2. Create a new issue if your problem isn't already reported
-3. Join our community discussions
-
----
-
-Made with ❤️ by the AI Drawing Studio team
